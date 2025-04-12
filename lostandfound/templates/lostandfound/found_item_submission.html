@@ -1,0 +1,115 @@
+{% extends "lostandfound/base.html" %}
+{% load static %}
+
+{% block title %}Submit Found Item{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card shadow-lg border-0">
+                <div class="card-header bg-primary text-white">
+                    <h2 class="h4 mb-0"><i class="fas fa-hand-holding-heart me-2"></i>Submit Found Item</h2>
+                </div>
+                <div class="card-body">
+                    <form method="POST" enctype="multipart/form-data" class="needs-validation" novalidate>
+                        {% csrf_token %}
+                        
+                        <div class="mb-4">
+                            <label for="description" class="form-label fw-bold">Description</label>
+                            <textarea class="form-control" id="description" name="description" rows="4" required></textarea>
+                            <div class="invalid-feedback">
+                                Please provide a detailed description (at least 10 characters)
+                            </div>
+                        </div>
+
+                        <div class="mb-4">
+                            <label for="location" class="form-label fw-bold">Location Found</label>
+                            <input type="text" class="form-control" id="location" name="location" required>
+                            <div class="invalid-feedback">
+                                Please specify where you found this item
+                            </div>
+                        </div>
+
+                        <div class="mb-4">
+                            <label for="photo" class="form-label fw-bold">Item Photo</label>
+                            <input class="form-control" type="file" id="photo" name="photo" accept="image/*" required>
+                            <small class="text-muted">Clear photos help identify items faster</small>
+                            <div class="invalid-feedback">
+                                Please upload a photo of the found item
+                            </div>
+                        </div>
+
+                        <div class="row mb-4">
+                            <div class="col-md-6">
+                                <label for="found_date" class="form-label fw-bold">Date Found</label>
+                                <input type="date" class="form-control" id="found_date" name="found_date" required>
+                            </div>
+                            <div class="col-md-6">
+                                <label for="found_time" class="form-label fw-bold">Time Found (optional)</label>
+                                <input type="time" class="form-control" id="found_time" name="found_time">
+                            </div>
+                        </div>
+
+                        <div class="mb-4">
+                            <label for="storage_location" class="form-label fw-bold">Current Storage Location</label>
+                            <input type="text" class="form-control" id="storage_location" name="storage_location">
+                            <small class="text-muted">Where can the owner retrieve this item?</small>
+                        </div>
+
+                        <!-- New fields for brand, color, size, identifiers -->
+                        <div class="row mb-4">
+                            <div class="col-md-4">
+                                <label for="brand" class="form-label fw-bold">Brand (if known)</label>
+                                <input type="text" class="form-control" id="brand" name="brand">
+                            </div>
+                            <div class="col-md-4">
+                                <label for="color" class="form-label fw-bold">Color</label>
+                                <input type="text" class="form-control" id="color" name="color">
+                            </div>
+                            <div class="col-md-4">
+                                <label for="size" class="form-label fw-bold">Size</label>
+                                <input type="text" class="form-control" id="size" name="size">
+                            </div>
+                        </div>
+
+                        <div class="mb-4">
+                            <label for="unique_identifiers" class="form-label fw-bold">Unique Identifiers</label>
+                            <textarea class="form-control" id="unique_identifiers" name="unique_identifiers" rows="2"></textarea>
+                            <small class="text-muted">Any special marks, serial numbers, or identifying features</small>
+                        </div>
+
+                        {% if not user.is_authenticated %}
+                        <div class="mb-4 border-top pt-3">
+                            <h4 class="fw-bold">Your Contact Information (Optional)</h4>
+                            <p class="text-muted">Providing contact info helps us notify you if your item is claimed.</p>
+                            
+                            <div class="row">
+                                <div class="col-md-6 mb-3">
+                                    <label for="submitter_name" class="form-label">Your Name</label>
+                                    <input type="text" class="form-control" id="submitter_name" name="submitter_name">
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label for="submitter_contact" class="form-label">Phone Number</label>
+                                    <input type="tel" class="form-control" id="submitter_contact" name="submitter_contact">
+                                </div>
+                            </div>
+                            <div class="mb-3">
+                                <label for="submitter_email" class="form-label">Email Address</label>
+                                <input type="email" class="form-control" id="submitter_email" name="submitter_email">
+                            </div>
+                        </div>
+                        {% endif %}
+
+                        <div class="d-grid">
+                            <button class="btn btn-primary btn-lg" type="submit">
+                                <i class="fas fa-paper-plane me-2"></i>Submit Found Item
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

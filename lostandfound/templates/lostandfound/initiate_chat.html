@@ -1,0 +1,27 @@
+{% extends 'lostandfound/base.html' %}
+
+{% block content %}
+<div class="container my-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card">
+                <div class="card-header bg-primary text-white">
+                    <h4>Contact Finder About: {{ found_item.title }}</h4>
+                </div>
+                <div class="card-body">
+                    <div class="alert alert-info">
+                        <p>Please describe how this item belongs to you and provide any verification details.</p>
+                    </div>
+                    
+                    <form method="post">
+                        {% csrf_token %}
+                        {{ form.as_p }}
+                        <button type="submit" class="btn btn-primary">Send Message</button>
+                        <a href="{% url 'item_list' %}" class="btn btn-secondary">Cancel</a>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

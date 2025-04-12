@@ -1,0 +1,24 @@
+{% extends "lostandfound/base.html" %}
+{% load static %}
+
+{% block title %}Verify Match{% endblock %}
+
+{% block content %}
+<div class="container">
+    <h1 class="text-center mb-4">Verify Match</h1>
+    <div class="card shadow">
+        <div class="card-header bg-warning text-dark">
+            <h2 class="h4 mb-0">Verification Questions</h2>
+        </div>
+        <div class="card-body">
+            <form method="POST" class="needs-validation" novalidate>
+                {% csrf_token %}
+                {{ form.as_p }}
+                <div class="d-grid">
+                    <button class="btn btn-warning btn-lg" type="submit">Verify</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

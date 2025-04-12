@@ -1,0 +1,98 @@
+{% extends "lostandfound/base.html" %}
+{% load static %}
+
+{% block title %}Report Lost Item{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card shadow-lg border-0">
+                <div class="card-header bg-danger text-white">
+                    <h2 class="h4 mb-0"><i class="fas fa-question-circle me-2"></i>Report Lost Item</h2>
+                </div>
+                <div class="card-body">
+                    <form method="POST" enctype="multipart/form-data" class="needs-validation" novalidate>
+                        {% csrf_token %}
+                        
+                        <div class="row mb-4">
+                            <div class="col-md-4">
+                                <label for="brand" class="form-label fw-bold">Brand</label>
+                                <input type="text" class="form-control" id="brand" name="brand">
+                            </div>
+                            <div class="col-md-4">
+                                <label for="color" class="form-label fw-bold">Color</label>
+                                <input type="text" class="form-control" id="color" name="color">
+                            </div>
+                            <div class="col-md-4">
+                                <label for="size" class="form-label fw-bold">Size</label>
+                                <input type="text" class="form-control" id="size" name="size">
+                            </div>
+                        </div>
+
+                        <div class="mb-4">
+                            <label for="unique_identifiers" class="form-label fw-bold">Unique Identifiers</label>
+                            <textarea class="form-control" id="unique_identifiers" name="unique_identifiers" rows="2"></textarea>
+                            <small class="text-muted">Any unique marks, serial numbers, or identifying features</small>
+                        </div>
+
+                        <div class="mb-4">
+                            <label for="description" class="form-label fw-bold">Additional Details</label>
+                            <textarea class="form-control" id="description" name="description" rows="3"></textarea>
+                        </div>
+
+                        <div class="mb-4">
+                            <button type="button" class="btn btn-outline-danger" id="getLocationBtn">
+                                <i class="fas fa-map-marker-alt me-2"></i>Get Lost Location
+                            </button>
+                            <input type="hidden" id="latitude" name="latitude">
+                            <input type="hidden" id="longitude" name="longitude">
+                            <div id="locationStatus" class="text-muted small mt-2"></div>
+                        </div>
+
+                        <div class="mb-4">
+                            <label for="location" class="form-label fw-bold">Location Lost</label>
+                            <input type="text" class="form-control" id="location" name="location" required>
+                            <div class="invalid-feedback">
+                                Please specify where you lost this item
+                            </div>
+                        </div>
+
+                        <div class="mb-4">
+                            <label for="photo" class="form-label fw-bold">Item Photo (if available)</label>
+                            <input class="form-control" type="file" id="photo" name="photo" accept="image/*">
+                            <small class="text-muted">Upload a photo if available (helps identification)</small>
+                        </div>
+
+                        <div class="row mb-4">
+                            <div class="col-md-6">
+                                <label for="lost_date" class="form-label fw-bold">Date Lost</label>
+                                <input type="date" class="form-control" id="lost_date" name="lost_date" required>
+                            </div>
+                            <div class="col-md-6">
+                                <label for="lost_time" class="form-label fw-bold">Time Lost (optional)</label>
+                                <input type="time" class="form-control" id="lost_time" name="lost_time">
+                            </div>
+                        </div>
+
+                        <div class="mb-4">
+                            <label for="contact_reward" class="form-label fw-bold">Reward (optional)</label>
+                            <div class="input-group">
+                                <span class="input-group-text">$</span>
+                                <input type="number" class="form-control" id="contact_reward" name="contact_reward" step="0.01" min="0">
+                            </div>
+                            <small class="text-muted">Optional reward for returning the item</small>
+                        </div>
+
+                        <div class="d-grid">
+                            <button class="btn btn-danger btn-lg" type="submit">
+                                <i class="fas fa-paper-plane me-2"></i>Report Lost Item
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

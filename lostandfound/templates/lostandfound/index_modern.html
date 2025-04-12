@@ -1,0 +1,57 @@
+{% extends "lostandfound/base_new.html" %}
+{% load static %}
+
+{% block content %}
+<!-- Hero Section -->
+<section class="hero-section text-center">
+    <div class="container">
+        <h1 class="display-4 fw-bold mb-4">Lost & Found Portal</h1>
+        <p class="lead mb-5">Reuniting lost items with their owners through our campus community</p>
+        <div class="d-flex justify-content-center gap-3">
+            <a href="/lost/" class="btn btn-light btn-lg px-4">
+                <i class="fas fa-question-circle me-2"></i>Report Lost Item
+            </a>
+            <a href="/found/" class="btn btn-outline-light btn-lg px-4">
+                <i class="fas fa-hand-holding-heart me-2"></i>Report Found Item
+            </a>
+        </div>
+    </div>
+</section>
+
+<!-- Features Section -->
+<section class="container mb-5">
+    <div class="row g-4">
+        <div class="col-md-4">
+            <div class="card h-100 p-4 text-center">
+                <div class="feature-icon">
+                    <i class="fas fa-bolt"></i>
+                </div>
+                <h3>Quick Reporting</h3>
+                <p>Report lost or found items in seconds with our simple form</p>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card h-100 p-4 text-center">
+                <div class="feature-icon">
+                    <i class="fas fa-bell"></i>
+                </div>
+                <h3>Instant Alerts</h3>
+                <p>Get notified when a potential match is found for your lost item</p>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card h-100 p-4 text-center">
+                <div class="feature-icon">
+                    <i class="fas fa-shield-alt"></i>
+                </div>
+                <h3>Secure Verification</h3>
+                <p>Our verification process ensures items go to their rightful owners</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- React App Container -->
+<div id="root" class="container my-5"></div>
+
+{% endblock %}

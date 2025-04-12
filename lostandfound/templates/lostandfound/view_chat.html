@@ -1,0 +1,54 @@
+{% extends 'lostandfound/base.html' %}
+
+{% block content %}
+<div class="container my-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card">
+                <div class="card-header bg-primary text-white">
+                    <h4>Chat About: {{ found_item.title }}</h4>
+                    <small>Status: {{ found_item.get_status_display }}</small>
+                </div>
+                <div class="card-body">
+                    <div class="chat-messages mb-4" style="max-height: 400px; overflow-y: auto;">
+                        {% for message in messages %}
+                        <div class="mb-3 {% if message.sender == request.user %}text-end{% endif %}">
+                            <div class="d-flex {% if message.sender == request.user %}justify-content-end{% endif %}">
+                                <div class="card {% if message.sender == request.user %}bg-primary text-white{% else %}bg-light{% endif %}" style="max-width: 75%;">
+                                    <div class="card-body p-2">
+                                        <p class="card-text mb-1">{{ message.content }}</p>
+                                        <small class="{% if message.sender == request.user %}text-white-50{% else %}text-muted{% endif %}">
+                                            {{ message.sender.username }} - {{ message.timestamp|timesince }} ago
+                                            {% if message.is_verified %}
+                                            <span class="badge bg-success">Verified</span>
+                                            {% endif %}
+                                        </small>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        {% empty %}
+                        <p class="text-center text-muted">No messages yet. Start the conversation!</p>
+                        {% endfor %}
+                    </div>
+                    
+                    <form method="post">
+                        {% csrf_token %}
+                        <div class="input-group mb-3">
+                            {{ form.content }}
+                            <button type="submit" class="btn btn-primary">Send</button>
+                        </div>
+                        {% if found_item.status == 'FOUND_WAITING' and found_item.submitter == request.user %}
+                        <div class="d-flex justify-content-between">
+                            <a href="{% url 'verify_claim' found_item.id %}" class="btn btn-success">
+                                Verify Claim
+                            </a>
+                        </div>
+                        {% endif %}
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,137 @@
+{% extends "lostandfound/base.html" %}
+{% load static %}
+
+{% block content %}
+<!-- Hero Section -->
+<section class="hero-section text-center">
+    <div class="container">
+        <h1 class="display-4 fw-bold mb-4">Lost & Found Portal</h1>
+        <p class="lead mb-5">Reuniting lost items with their owners through our campus community</p>
+        <div class="d-flex justify-content-center gap-3">
+            <a href="/lost/" class="btn btn-light btn-lg px-4">
+                <i class="fas fa-question-circle me-2"></i>Report Lost Item
+            </a>
+            <a href="/found/" class="btn btn-light btn-lg px-4">
+                <i class="fas fa-hand-holding-heart me-2"></i>Report Found Item
+            </a>
+        </div>
+    </div>
+</section>
+
+<!-- How It Works Section -->
+<section class="container py-5">
+    <div class="text-center mb-5">
+        <h2 class="display-5 fw-bold">Our Simple Process</h2>
+        <p class="lead text-muted">Four easy steps to reunite lost items with their owners</p>
+    </div>
+    <div class="row g-4">
+        <div class="col-lg-3 col-md-6">
+            <div class="card border-0 shadow-sm h-100">
+                <div class="card-body text-center p-4">
+                    <div class="icon-square bg-primary bg-gradient text-white rounded-circle mb-3 mx-auto" style="width: 60px; height: 60px; line-height: 60px;">
+                        <i class="fas fa-edit fs-4"></i>
+                    </div>
+                    <h4 class="fw-bold">1. Report</h4>
+                    <p class="text-muted">Submit details about your lost or found item with photos</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-3 col-md-6">
+            <div class="card border-0 shadow-sm h-100">
+                <div class="card-body text-center p-4">
+                    <div class="icon-square bg-success bg-gradient text-white rounded-circle mb-3 mx-auto" style="width: 60px; height: 60px; line-height: 60px;">
+                        <i class="fas fa-search fs-4"></i>
+                    </div>
+                    <h4 class="fw-bold">2. Match</h4>
+                    <p class="text-muted">Our AI system finds potential matches automatically</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-3 col-md-6">
+            <div class="card border-0 shadow-sm h-100">
+                <div class="card-body text-center p-4">
+                    <div class="icon-square bg-warning bg-gradient text-white rounded-circle mb-3 mx-auto" style="width: 60px; height: 60px; line-height: 60px;">
+                        <i class="fas fa-shield-alt fs-4"></i>
+                    </div>
+                    <h4 class="fw-bold">3. Verify</h4>
+                    <p class="text-muted">Answer security questions to verify ownership</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-3 col-md-6">
+            <div class="card border-0 shadow-sm h-100">
+                <div class="card-body text-center p-4">
+                    <div class="icon-square bg-info bg-gradient text-white rounded-circle mb-3 mx-auto" style="width: 60px; height: 60px; line-height: 60px;">
+                        <i class="fas fa-handshake fs-4"></i>
+                    </div>
+                    <h4 class="fw-bold">4. Reunite</h4>
+                    <p class="text-muted">Arrange a secure pickup of your lost item</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Recent Items Section -->
+<section class="bg-light py-5">
+    <div class="container">
+        <div class="text-center mb-5">
+            <h2 class="display-5 fw-bold">Recently Reported Items</h2>
+            <p class="lead text-muted">Help reunite these items with their owners</p>
+        </div>
+        <div class="row g-4">
+            {% for item in recent_lost_items %}
+            <div class="col-lg-4 col-md-6">
+                <div class="card h-100 border-0 shadow-sm overflow-hidden">
+                    {% if item.photo %}
+                    <div class="card-img-top" style="height: 200px; overflow: hidden;">
+                        <img src="{{ item.photo.url }}" class="img-fluid w-100 h-100 object-fit-cover" alt="{{ item.description|truncatechars:30 }}">
+                    </div>
+                    {% endif %}
+                    <div class="card-body">
+                        <div class="d-flex justify-content-between align-items-center mb-2">
+                            <span class="badge bg-danger">Lost</span>
+                            <small class="text-muted">{{ item.date_submitted|timesince }} ago</small>
+                        </div>
+                        <h5 class="card-title">{{ item.description|truncatechars:50 }}</h5>
+                        <p class="card-text text-muted">
+                            <i class="fas fa-map-marker-alt me-2"></i>{{ item.location|truncatechars:30 }}
+                        </p>
+                        <a href="/lost/" class="btn btn-outline-primary btn-sm">View Details</a>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+            {% for item in recent_found_items %}
+            <div class="col-lg-4 col-md-6">
+                <div class="card h-100 border-0 shadow-sm overflow-hidden">
+                    {% if item.photo %}
+                    <div class="card-img-top" style="height: 200px; overflow: hidden;">
+                        <img src="{{ item.photo.url }}" class="img-fluid w-100 h-100 object-fit-cover" alt="{{ item.description|truncatechars:30 }}">
+                    </div>
+                    {% endif %}
+                    <div class="card-body">
+                        <div class="d-flex justify-content-between align-items-center mb-2">
+                            <span class="badge bg-success">Found</span>
+                            <small class="text-muted">{{ item.date_submitted|timesince }} ago</small>
+                        </div>
+                        <h5 class="card-title">{{ item.description|truncatechars:50 }}</h5>
+                        <p class="card-text text-muted">
+                            <i class="fas fa-map-marker-alt me-2"></i>{{ item.location|truncatechars:30 }}
+                        </p>
+                        <a href="/found/" class="btn btn-outline-primary btn-sm">View Details</a>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+        <div class="text-center mt-4">
+            <a href="/items/" class="btn btn-primary px-4">View All Items</a>
+        </div>
+    </div>
+</section>
+
+<!-- React App Container -->
+<div id="root" class="container my-5"></div>
+
+{% endblock %}
