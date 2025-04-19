@@ -1,4 +1,9 @@
 {% extends "lostandfound/base.html" %}
+{% load static %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/LoginPage.css' %}">
+{% endblock %}
 
 {% block content %}
 <div class="container mt-5">

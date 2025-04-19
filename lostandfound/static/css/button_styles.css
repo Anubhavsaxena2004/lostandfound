@@ -1,9 +1,9 @@
 .btn-outline-light {
-    color: #f8f9fa;
-    border-color: #f8f9fa;
+    color: #faf8fa;
+    border-color: #faf8fa;
     background-color: rgba(255, 255, 255, 0.1); /* Light background for visibility */
 }
 
 .btn-outline-light:hover {
-    background-color: rgba(255, 255, 255, 0.2); /* Slightly darker on hover */
+    background-color: rgba(255, 255, 255, 0.052); /* Slightly darker on hover */
 }
